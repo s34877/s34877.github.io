@@ -14,7 +14,6 @@
         }
 
         body {
-            /* ธีมสีน้ำเงิน พื้นหลังไล่สีมีความเป็นกาแลกซี */
             background: linear-gradient(135deg, #0b0c10, #1f2833, #0f2027, #203a43, #2c5364);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -32,7 +31,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* แอนิเมชันกล่องข้อความขยับขึ้นลงช้าๆ */
         @keyframes floatCard {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -54,8 +52,24 @@
         h1 {
             color: #1565c0;
             font-size: 26px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 600;
+        }
+
+        /* โค้ดสำหรับรูปภาพที่ 1 */
+        .image-placeholder-1 {
+            width: 150px;
+            height: 150px;
+            background-color: #e0e0e0;
+            border: 2px dashed #1565c0;
+            border-radius: 10px;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            font-size: 14px;
+            /* วิธีใส่รูปจริง: เปลี่ยนเป็น background-image: url('ชื่อรูปของคุณ.jpg'); background-size: cover; */
         }
 
         p {
@@ -70,7 +84,6 @@
             color: #0d47a1;
         }
 
-        /* ปุ่มกล่องข้อความสีฟ้าสำหรับกดไปหน้าถัดไป */
         .btn-portfolio {
             display: inline-block;
             background: linear-gradient(135deg, #2196F3, #1565c0);
@@ -95,12 +108,17 @@
 
     <div class="card">
         <h1>ยินดีต้อนรับสู่โปรไฟล์ของฉัน</h1>
+        
+        <!-- โค้ดสำหรับใส่รูปภาพที่ 1 (สามารถเปลี่ยนแท็ก <div เป็น <img src="..." ได้ตามต้องการ) -->
+        <div class="image-placeholder-1">
+            ใส่รูปภาพที่ 1 ตรงนี้
+        </div>
+
         <p>สวัสดีค่ะ! ฉันชื่อ <span class="highlight">พรนภา บุญคำ</span></p>
         <p><span class="highlight">Pornnapha Boonkham</span></p>
         <p>ขณะนี้กำลังเรียนอยู่แผนการเรียน <span class="highlight">Gifted Program</span></p>
         <p>นี่คือเว็บไซต์แรกของฉันที่โฮสต์บน GitHub Pages!</p>
         
-        <!-- พอกดปุ่มนี้จะวิ่งไปที่หน้า portfolio.html -->
         <a href="portfolio.html" class="btn-portfolio">ดูแฟ้มสะสมผลงานของฉัน</a>
     </div>
 
