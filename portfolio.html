@@ -19,42 +19,12 @@
             animation: gradientBG 15s ease infinite;
             color: #fff;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* --- เอฟเฟกต์ประกายดาวลอยไปลอยมาจางๆ --- */
-        .sparkle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: flySparkle linear infinite;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        @keyframes flySparkle {
-            0% {
-                transform: translateY(105vh) scale(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.6;
-            }
-            80% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 0;
-            }
         }
 
         /* แถบเมนูด้านบน */
@@ -94,8 +64,6 @@
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 100px);
-            position: relative;
-            z-index: 10;
         }
 
         .section-page {
@@ -286,7 +254,7 @@
             margin: 0 auto 20px auto;
         }
 
-        /* --- หน้า CONTACT (กล่องข้อความใหญ่ลอยขึ้นลงช้าๆ) --- */
+        /* หน้า CONTACT */
         .contact-card {
             background: rgba(255, 255, 255, 0.95);
             color: #333;
@@ -335,9 +303,6 @@
     </style>
 </head>
 <body>
-
-    <!-- เอฟเฟกต์ประกายดวงดาวลอยไปมา -->
-    <div id="sparkle-container"></div>
 
     <!-- แถบเมนูด้านบน -->
     <header>
@@ -478,28 +443,6 @@
 
             document.getElementById(tabId).classList.add('active');
             document.getElementById('nav-' + tabId).classList.add('active');
-        }
-
-        // สร้างเอฟเฟกต์ประกายดาวลอยจางๆ อัตโนมัติ
-        const sparkleContainer = document.getElementById('sparkle-container');
-        const numberOfSparkles = 25; // จำนวนประกายดาว
-
-        for (let i = 0; i < numberOfSparkles; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            
-            // สุ่มตำแหน่ง ขนาด และความเร็ว
-            const size = Math.random() * 4 + 2; // ขนาด 2px ถึง 6px
-            sparkle.style.width = ${size}px;
-            sparkle.style.height = ${size}px;
-            sparkle.style.left = ${Math.random() * 100}vw;
-            
-            const duration = Math.random() * 6 + 4; // ระยะเวลาลอย 4 ถึง 10 วินาที
-            const delay = Math.random() * 5; // ดีเลย์การเริ่ม
-            sparkle.style.animationDuration = ${duration}s;
-            sparkle.style.animationDelay = ${delay}s;
-
-            sparkleContainer.appendChild(sparkle);
         }
     </script>
 
