@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>หน้าแนะนำตัว - พรนภา บุญคำ</title>
+    <title>Portfolio - พรนภา บุญคำ</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,16 +14,11 @@
         }
 
         body {
-            /* ธีมสีน้ำเงิน พื้นหลังไล่สีมีความเป็นกาแลกซี */
             background: linear-gradient(135deg, #0b0c10, #1f2833, #0f2027, #203a43, #2c5364);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            color: #333;
+            color: #fff;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
 
         @keyframes gradientBG {
@@ -32,80 +27,255 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* แอนิเมชันกล่องข้อความขยับขึ้นลงช้าๆ */
-        @keyframes floatCard {
+        /* แถบเมนูด้านบน */
+        header {
+            background: rgba(15, 32, 39, 0.85);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #cfd8dc;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 14px;
+            font-weight: 400;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 3px;
+        }
+
+        nav a:hover, nav a.active {
+            color: #64b5f6;
+            border-bottom: 2px solid #64b5f6;
+        }
+
+        /* พื้นที่แสดงเนื้อหา */
+        .content-container {
+            margin-top: 100px;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+        }
+
+        .section-page {
+            display: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 650px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* หน้า HOME */
+        .home-title {
+            font-size: 42px;
+            font-weight: 600;
+            color: #64b5f6;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(100, 181, 246, 0.3);
+        }
+
+        .home-subtitle {
+            font-size: 18px;
+            color: #e0e0e0;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        /* โค้ดสำหรับรูปภาพที่ 2 ในหน้า HOME */
+        .image-placeholder-2 {
+            width: 250px;
+            height: 160px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px dashed #64b5f6;
+            border-radius: 10px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #cfd8dc;
+            font-size: 14px;
+        }
+
+        /* หน้า ABOUT ME */
+        @keyframes floatBox {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
             100% { transform: translateY(0px); }
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 550px;
-            width: 100%;
-            padding: 40px;
-            text-align: center;
-            animation: floatCard 4s ease-in-out infinite;
+        /* โค้ดสำหรับรูปภาพที่ 3 (ทรงกลม ขยับขึ้นลงช้าๆ) */
+        .image-placeholder-3 {
+            width: 130px;
+            height: 130px;
+            background-color: #ddd;
+            border: 3px solid #64b5f6;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #555;
+            font-size: 13px;
+            animation: floatBox 4s ease-in-out infinite;
+            /* วิธีใส่รูปจริง: background-image: url('รูปของคุณ.jpg'); background-size: cover; background-position: center; */
         }
 
-        h1 {
-            color: #1565c0;
-            font-size: 26px;
-            margin-bottom: 20px;
+        .about-details {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .about-details strong {
+            color: #64b5f6;
+        }
+
+        /* กล่องข้อความสีขาวขยับได้ในหน้า ABOUT ME */
+        .white-card-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: floatBox 4s ease-in-out infinite;
+            margin-top: 10px;
+        }
+
+        .education-title {
+            font-size: 20px;
             font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+
+        .school-name {
+            font-size: 16px;
+            color: #444;
+            font-weight: 400;
+        }
+
+        /* หัวข้อหน้าอื่นๆ */
+        h2 {
+            font-size: 30px;
+            color: #64b5f6;
+            margin-bottom: 20px;
         }
 
         p {
             font-size: 16px;
-            line-height: 1.8;
-            color: #444;
-            margin-bottom: 10px;
-        }
-
-        .highlight {
-            font-weight: 600;
-            color: #0d47a1;
-        }
-
-        /* ปุ่มกล่องข้อความสีฟ้าสำหรับกดไปหน้าถัดไป */
-        .btn-portfolio {
-            display: inline-block;
-            background: linear-gradient(135deg, #2196F3, #1565c0);
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-portfolio:hover {
-            background: linear-gradient(135deg, #1e88e5, #0d47a1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.6);
+            line-height: 1.6;
+            color: #b0bec5;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <h1>ยินดีต้อนรับสู่โปรไฟล์ของฉัน</h1>
-        <p>สวัสดีค่ะ! ฉันชื่อ <span class="highlight">พรนภา บุญคำ</span></p>
-        <p><span class="highlight">Pornnapha Boonkham</span></p>
-        <p>ขณะนี้กำลังเรียนอยู่แผนการเรียน <span class="highlight">Gifted Program</span></p>
-        <p>นี่คือเว็บไซต์แรกของฉันที่โฮสต์บน GitHub Pages!</p>
+    <!-- แถบเมนูด้านบน -->
+    <header>
+        <nav>
+            <a href="#" onclick="switchTab('home')" id="nav-home" class="active">HOME</a>
+            <a href="#" onclick="switchTab('about')" id="nav-about">ABOUT ME</a>
+            <a href="#" onclick="switchTab('university')" id="nav-university">UNIVERSITY</a>
+            <a href="#" onclick="switchTab('works')" id="nav-works">WORKS</a>
+            <a href="#" onclick="switchTab('contact')" id="nav-contact">CONTACT</a>
+        </nav>
+    </header>
+
+    <!-- พื้นที่คอนเทนต์ -->
+    <div class="content-container">
         
-        <!-- พอกดปุ่มนี้จะวิ่งไปที่หน้า portfolio.html -->
-        <a href="portfolio.html" class="btn-portfolio">ดูแฟ้มสะสมผลงานของฉัน</a>
+        <!-- หน้า HOME -->
+        <div id="home" class="section-page active">
+            <h1 class="home-title">ยินดีต้อนรับ</h1>
+            <p class="home-subtitle">เว็ปไซต์แนะนำตัวของ พรนภา บุญคำ</p>
+            
+            <!-- โค้ดสำหรับใส่รูปที่ 2 -->
+            <div class="image-placeholder-2">
+                ใส่รูปภาพที่ 2 ตรงนี้
+            </div>
+        </div>
+
+        <!-- หน้า ABOUT ME -->
+        <div id="about" class="section-page">
+            <!-- โค้ดสำหรับใส่รูปที่ 3 ทรงกลมขยับได้ -->
+            <div class="image-placeholder-3">
+                รูปที่ 3
+            </div>
+
+            <div class="about-details">
+                <strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ<br>
+                <strong>ชื่อเล่น :</strong> มุก<br>
+                <strong>ระดับชั้น :</strong> ม.6/2 เลขที่ 26<br>
+                <strong>วันเกิด :</strong> 22/09/2551<br>
+                <strong>อายุ :</strong> 17 ปี
+            </div>
+
+            <!-- กล่องข้อความสีขาวขยับได้ (การศึกษา) -->
+            <div class="white-card-box">
+                <div class="education-title">การศึกษา</div>
+                <div class="school-name">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</div>
+            </div>
+        </div>
+
+        <!-- หน้า UNIVERSITY -->
+        <div id="university" class="section-page">
+            <h2>UNIVERSITY</h2>
+            <p>ข้อมูลเป้าหมายและคณะที่สนใจศึกษาต่อในระดับมหาวิทยาลัย</p>
+        </div>
+
+        <!-- หน้า WORKS -->
+        <div id="works" class="section-page">
+            <h2>WORKS</h2>
+            <p>รวมผลงานและเกียรติบัตรต่างๆ ของฉัน</p>
+        </div>
+
+        <!-- หน้า CONTACT -->
+        <div id="contact" class="section-page">
+            <h2>CONTACT</h2>
+            <p>ช่องทางการติดต่อเพิ่มเติม</p>
+        </div>
+
     </div>
 
-</body>
-</html>
-</body>
-</html>
+    <script>
+        function switchTab(tabId) {
+            const pages = document.querySelectorAll('.section-page');
+            pages.forEach(page => page.classList.remove('active'));
 
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('nav-' + tabId).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
