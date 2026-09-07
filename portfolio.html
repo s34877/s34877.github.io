@@ -74,7 +74,7 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            max-width: 650px;
+            max-width: 800px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -105,7 +105,6 @@
             margin-bottom: 30px;
         }
 
-        /* โค้ดสำหรับรูปภาพที่ 2 ในหน้า HOME */
         .image-placeholder-2 {
             width: 250px;
             height: 160px;
@@ -127,7 +126,6 @@
             100% { transform: translateY(0px); }
         }
 
-        /* โค้ดสำหรับรูปภาพที่ 3 (ทรงกลม ขยับขึ้นลงช้าๆ) */
         .image-placeholder-3 {
             width: 130px;
             height: 130px;
@@ -141,7 +139,6 @@
             color: #555;
             font-size: 13px;
             animation: floatBox 4s ease-in-out infinite;
-            /* วิธีใส่รูปจริง: background-image: url('รูปของคุณ.jpg'); background-size: cover; background-position: center; */
         }
 
         .about-details {
@@ -157,7 +154,6 @@
             color: #64b5f6;
         }
 
-        /* กล่องข้อความสีขาวขยับได้ในหน้า ABOUT ME */
         .white-card-box {
             background: rgba(255, 255, 255, 0.95);
             color: #333;
@@ -181,17 +177,84 @@
             font-weight: 400;
         }
 
-        /* หัวข้อหน้าอื่นๆ */
+        /* หัวข้อทั่วไป */
         h2 {
             font-size: 30px;
             color: #64b5f6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         p {
             font-size: 16px;
             line-height: 1.6;
             color: #b0bec5;
+        }
+
+        /* --- สไตล์เฉพาะสำหรับหน้า WORKS --- */
+        .works-main-title {
+            font-size: 34px;
+            color: #64b5f6;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(100, 181, 246, 0.3);
+        }
+
+        .work-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .work-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #90caf9;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .work-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+
+        .work-desc strong {
+            color: #64b5f6;
+        }
+
+        /* จัดการรูปภาพในหน้า WORKS */
+        .img-container-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .img-placeholder {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px dashed #64b5f6;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #cfd8dc;
+            font-size: 14px;
+        }
+
+        /* สำหรับรูปคู่ (ข้างกัน) */
+        .img-double {
+            width: 48%;
+            height: 180px;
+        }
+
+        /* สำหรับรูปเดี่ยว (ตรงกลาง) */
+        .img-single {
+            width: 60%;
+            height: 200px;
+            margin: 0 auto 20px auto;
         }
     </style>
 </head>
@@ -215,20 +278,12 @@
         <div id="home" class="section-page active">
             <h1 class="home-title">ยินดีต้อนรับ</h1>
             <p class="home-subtitle">เว็ปไซต์แนะนำตัวของ พรนภา บุญคำ</p>
-            
-            <!-- โค้ดสำหรับใส่รูปที่ 2 -->
-            <div class="image-placeholder-2">
-                ใส่รูปภาพที่ 2 ตรงนี้
-            </div>
+            <div class="image-placeholder-2">ใส่รูปภาพที่ 2 ตรงนี้</div>
         </div>
 
         <!-- หน้า ABOUT ME -->
         <div id="about" class="section-page">
-            <!-- โค้ดสำหรับใส่รูปที่ 3 ทรงกลมขยับได้ -->
-            <div class="image-placeholder-3">
-                รูปที่ 3
-            </div>
-
+            <div class="image-placeholder-3">รูปที่ 3</div>
             <div class="about-details">
                 <strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ<br>
                 <strong>ชื่อเล่น :</strong> มุก<br>
@@ -236,8 +291,6 @@
                 <strong>วันเกิด :</strong> 22/09/2551<br>
                 <strong>อายุ :</strong> 17 ปี
             </div>
-
-            <!-- กล่องข้อความสีขาวขยับได้ (การศึกษา) -->
             <div class="white-card-box">
                 <div class="education-title">การศึกษา</div>
                 <div class="school-name">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</div>
@@ -251,9 +304,65 @@
         </div>
 
         <!-- หน้า WORKS -->
-        <div id="works" class="section-page">
-            <h2>WORKS</h2>
-            <p>รวมผลงานและเกียรติบัตรต่างๆ ของฉัน</p>
+        <div id="works" class="section-page" style="text-align: left;">
+            <h2 class="works-main-title" style="text-align: center;">WORKS</h2>
+
+            <!-- ผลงานชิ้นที่ 1 -->
+            <div class="work-item">
+                <!-- รูปภาพที่ 4 และ 5 อยู่ข้างกัน -->
+                <div class="img-container-row">
+                    <div class="img-placeholder img-double">รูปภาพที่ 4</div>
+                    <div class="img-placeholder img-double">รูปภาพที่ 5</div>
+                </div>
+                <div class="work-title">ผลงานชิ้นที่ 1 : คณะกรรมการสภานักเรียน โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
+                <div class="work-desc">
+                    <strong>สิ่งที่ได้รับ :</strong> ได้พัฒนาทักษะความเป็นผู้นำ การทำงานเป็นทีม จิตสาธารณะ และการสื่อสารกับผู้คนหลากหลายกลุ่ม ซึ่งเป็นทักษะทางสังคม (Soft Skills) ที่สำคัญในการสื่อสารความรู้ด้านสุขภาพแก่ผู้ป่วยและการปฏิบัติงานในวิชาชีพเภสัชกรรมที่ต้องพบปะผู้คนตลอดเวลา
+                </div>
+            </div>
+
+            <!-- ผลงานชิ้นที่ 2 -->
+            <div class="work-item">
+                <!-- รูปภาพที่ 6 และ 7 อยู่ข้างกัน -->
+                <div class="img-container-row">
+                    <div class="img-placeholder img-double">รูปภาพที่ 6</div>
+                    <div class="img-placeholder img-double">รูปภาพที่ 7</div>
+                </div>
+                <div class="work-title">ผลงานชิ้นที่ 2 : การฝึกปฏิบัติงานกลุ่มงานการพยาบาล โรงพยาบาลบ้านบึง</div>
+                <div class="work-desc">
+                    <strong>สิ่งที่ได้รับ :</strong> ได้เรียนรู้ระบบการทำงานจริงในโรงพยาบาล การดูแลผู้ป่วย และการทำงานร่วมกับสหสาขาวิชาชีพในระบบสาธารณสุข ช่วยให้เข้าใจบริบทหน้างานจริงและการสื่อสารเพื่อความปลอดภัยของผู้ป่วย (Patient Safety)
+                </div>
+            </div>
+
+            <!-- ผลงานชิ้นที่ 3 -->
+            <div class="work-item">
+                <!-- รูปภาพที่ 8 (รูปเดี่ยวตรงกลาง) -->
+                <div class="img-placeholder img-single">รูปภาพที่ 8</div>
+                <div class="work-title">ผลงานชิ้นที่ 3 : การแข่งขัน A-MATH สัปดาห์คณิตศาสตร์สู่ความเป็นเลิศ</div>
+                <div class="work-desc">
+                    <strong>สิ่งที่ได้รับ :</strong> ได้ฝึกกระบวนการคิดคำนวณ การแก้ปัญหาภายใต้เงื่อนไขเวลา และการคิดเชิงตรรกะ ซึ่งมีความสำคัญอย่างยิ่งต่อการคำนวณขนาดยักษ์/ขนาดยา (Dose calculation) และการวิเคราะห์ข้อมูลทางเภสัชสถิติอย่างแม่นยำ
+                </div>
+            </div>
+
+            <!-- ผลงานชิ้นที่ 4 -->
+            <div class="work-item">
+                <!-- รูปภาพที่ 9 (รูปเดี่ยวตรงกลาง) -->
+                <div class="img-placeholder img-single">รูปภาพที่ 9</div>
+                <div class="work-title">ผลงานชิ้นที่ 4 : กิจกรรมอบรมเชิงปฏิบัติการด้านวิทยาศาสตร์ ระดับมัธยมศึกษาตอนปลาย มหาวิทยาลัยเด็กประเทศไทย</div>
+                <div class="work-desc">
+                    <strong>สิ่งที่ได้รับ :</strong> ได้ฝึกทักษะกระบวนการทางวิทยาศาสตร์ การทดลอง และการใช้เครื่องมือปฏิบัติการ ซึ่งเป็นรากฐานสำคัญของงานวิจัย การพัฒนาตำรับยา และกระบวนการสังเคราะห์สารเคมีหรือผลิตภัณฑ์สุขภาพ
+                </div>
+            </div>
+
+            <!-- ผลงานชิ้นที่ 5 -->
+            <div class="work-item">
+                <!-- รูปภาพที่ 10 (รูปเดี่ยวตรงกลาง) -->
+                <div class="img-placeholder img-single">รูปภาพที่ 10</div>
+                <div class="work-title">ผลงานชิ้นที่ 5 : ประกวดนำเสนอนโยบายสาธารณะ "CHONBURI SMART CITY"</div>
+                <div class="work-desc">
+                    <strong>สิ่งที่ได้รับ :</strong> ได้พัฒนาทักษะการคิดเชิงวิเคราะห์และการวางแผนเชิงระบบ (System Thinking) ซึ่งจำเป็นต่อการมองภาพรวมด้านระบบสาธารณสุข การบริหารจัดการนโยบายสุขภาพ และการขับเคลื่อนนวัตกรรมเพื่อคุณภาพชีวิตที่ดีของประชาชนในอนาคต
+                </div>
+            </div>
+
         </div>
 
         <!-- หน้า CONTACT -->
@@ -276,9 +385,6 @@
             document.getElementById('nav-' + tabId).classList.add('active');
         }
     </script>
-
-</body>
-</html>
 
 </body>
 </html>
