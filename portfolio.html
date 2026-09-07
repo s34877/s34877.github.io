@@ -19,42 +19,12 @@
             animation: gradientBG 15s ease infinite;
             color: #fff;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* --- เอฟเฟกต์ประกายดาวลอยไปลอยมาจางๆ --- */
-        .sparkle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: flySparkle linear infinite;
-            opacity: 0;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        @keyframes flySparkle {
-            0% {
-                transform: translateY(105vh) scale(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.6;
-            }
-            80% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1);
-                opacity: 0;
-            }
         }
 
         /* แถบเมนูด้านบน */
@@ -94,8 +64,6 @@
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 100px);
-            position: relative;
-            z-index: 10;
         }
 
         .section-page {
@@ -222,7 +190,7 @@
             color: #b0bec5;
         }
 
-        /* หน้า WORKS */
+        /* --- สไตล์เฉพาะสำหรับหน้า WORKS --- */
         .works-main-title {
             font-size: 34px;
             color: #64b5f6;
@@ -257,6 +225,7 @@
             color: #64b5f6;
         }
 
+        /* จัดการรูปภาพในหน้า WORKS */
         .img-container-row {
             display: flex;
             justify-content: center;
@@ -275,69 +244,21 @@
             font-size: 14px;
         }
 
+        /* สำหรับรูปคู่ (ข้างกัน) */
         .img-double {
             width: 48%;
             height: 180px;
         }
 
+        /* สำหรับรูปเดี่ยว (ตรงกลาง) */
         .img-single {
             width: 60%;
             height: 200px;
             margin: 0 auto 20px auto;
         }
-
-        /* --- หน้า CONTACT (กล่องข้อความใหญ่ลอยขึ้นลงช้าๆ) --- */
-        .contact-card {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            max-width: 600px;
-            margin: 0 auto;
-            animation: floatBox 4s ease-in-out infinite;
-            text-align: left;
-        }
-
-        .contact-card h2 {
-            color: #1565c0;
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 28px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            margin-bottom: 18px;
-            color: #444;
-            word-break: break-all;
-        }
-
-        .contact-icon {
-            font-size: 24px;
-            margin-right: 15px;
-            min-width: 35px;
-            text-align: center;
-        }
-
-        .contact-item a {
-            color: #0d47a1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: #2196F3;
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-
-    <!-- เอฟเฟกต์ประกายดวงดาวลอยไปมา -->
-    <div id="sparkle-container"></div>
 
     <!-- แถบเมนูด้านบน -->
     <header>
@@ -388,6 +309,7 @@
 
             <!-- ผลงานชิ้นที่ 1 -->
             <div class="work-item">
+                <!-- รูปภาพที่ 4 และ 5 อยู่ข้างกัน -->
                 <div class="img-container-row">
                     <div class="img-placeholder img-double">รูปภาพที่ 4</div>
                     <div class="img-placeholder img-double">รูปภาพที่ 5</div>
@@ -400,6 +322,7 @@
 
             <!-- ผลงานชิ้นที่ 2 -->
             <div class="work-item">
+                <!-- รูปภาพที่ 6 และ 7 อยู่ข้างกัน -->
                 <div class="img-container-row">
                     <div class="img-placeholder img-double">รูปภาพที่ 6</div>
                     <div class="img-placeholder img-double">รูปภาพที่ 7</div>
@@ -412,6 +335,7 @@
 
             <!-- ผลงานชิ้นที่ 3 -->
             <div class="work-item">
+                <!-- รูปภาพที่ 8 (รูปเดี่ยวตรงกลาง) -->
                 <div class="img-placeholder img-single">รูปภาพที่ 8</div>
                 <div class="work-title">ผลงานชิ้นที่ 3 : การแข่งขัน A-MATH สัปดาห์คณิตศาสตร์สู่ความเป็นเลิศ</div>
                 <div class="work-desc">
@@ -421,6 +345,7 @@
 
             <!-- ผลงานชิ้นที่ 4 -->
             <div class="work-item">
+                <!-- รูปภาพที่ 9 (รูปเดี่ยวตรงกลาง) -->
                 <div class="img-placeholder img-single">รูปภาพที่ 9</div>
                 <div class="work-title">ผลงานชิ้นที่ 4 : กิจกรรมอบรมเชิงปฏิบัติการด้านวิทยาศาสตร์ ระดับมัธยมศึกษาตอนปลาย มหาวิทยาลัยเด็กประเทศไทย</div>
                 <div class="work-desc">
@@ -430,45 +355,25 @@
 
             <!-- ผลงานชิ้นที่ 5 -->
             <div class="work-item">
+                <!-- รูปภาพที่ 10 (รูปเดี่ยวตรงกลาง) -->
                 <div class="img-placeholder img-single">รูปภาพที่ 10</div>
                 <div class="work-title">ผลงานชิ้นที่ 5 : ประกวดนำเสนอนโยบายสาธารณะ "CHONBURI SMART CITY"</div>
                 <div class="work-desc">
                     <strong>สิ่งที่ได้รับ :</strong> ได้พัฒนาทักษะการคิดเชิงวิเคราะห์และการวางแผนเชิงระบบ (System Thinking) ซึ่งจำเป็นต่อการมองภาพรวมด้านระบบสาธารณสุข การบริหารจัดการนโยบายสุขภาพ และการขับเคลื่อนนวัตกรรมเพื่อคุณภาพชีวิตที่ดีของประชาชนในอนาคต
                 </div>
             </div>
+
         </div>
 
         <!-- หน้า CONTACT -->
-        <div id="contact" class="section-page" style="background: transparent; border: none; box-shadow: none; padding: 0;">
-            <div class="contact-card">
-                <h2>ช่องทางการติดต่อ</h2>
-                
-                <div class="contact-item">
-                    <span class="contact-icon">📧</span>
-                    <span><strong>Gmail :</strong> <a href="mailto:pornapha2008@gmail.com">pornapha2008@gmail.com</a></span>
-                </div>
-
-                <div class="contact-item">
-                    <span class="contact-icon">📞</span>
-                    <span><strong>เบอร์ติดต่อ :</strong> <a href="tel:0626685282">0626685282</a></span>
-                </div>
-
-                <div class="contact-item">
-                    <span class="contact-icon">💬</span>
-                    <span><strong>Line ID :</strong> mookke2008</span>
-                </div>
-
-                <div class="contact-item">
-                    <span class="contact-icon">🌐</span>
-                    <span><strong>Facebook :</strong> พรนภา บุญคำ</span>
-                </div>
-            </div>
+        <div id="contact" class="section-page">
+            <h2>CONTACT</h2>
+            <p>ช่องทางการติดต่อเพิ่มเติม</p>
         </div>
 
     </div>
 
     <script>
-        // ฟังก์ชันเปลี่ยนหน้าเมนูด้านบน
         function switchTab(tabId) {
             const pages = document.querySelectorAll('.section-page');
             pages.forEach(page => page.classList.remove('active'));
@@ -478,28 +383,6 @@
 
             document.getElementById(tabId).classList.add('active');
             document.getElementById('nav-' + tabId).classList.add('active');
-        }
-
-        // สร้างเอฟเฟกต์ประกายดาวลอยจางๆ อัตโนมัติ
-        const sparkleContainer = document.getElementById('sparkle-container');
-        const numberOfSparkles = 25; // จำนวนประกายดาว
-
-        for (let i = 0; i < numberOfSparkles; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            
-            // สุ่มตำแหน่ง ขนาด และความเร็ว
-            const size = Math.random() * 4 + 2; // ขนาด 2px ถึง 6px
-            sparkle.style.width = ${size}px;
-            sparkle.style.height = ${size}px;
-            sparkle.style.left = ${Math.random() * 100}vw;
-            
-            const duration = Math.random() * 6 + 4; // ระยะเวลาลอย 4 ถึง 10 วินาที
-            const delay = Math.random() * 5; // ดีเลย์การเริ่ม
-            sparkle.style.animationDuration = ${duration}s;
-            sparkle.style.animationDelay = ${delay}s;
-
-            sparkleContainer.appendChild(sparkle);
         }
     </script>
 
