@@ -3,6 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>หน้าแนะนำตัว - พรนภา บุญคำ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            /* ธีมสีน้ำเงิน พื้นหลังไล่สีมีความเป็นกาแลกซี */
+            background: linear-gradient(135deg, #0b0c10, #1f2833, #0f2027, #203a43, #2c5364);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* แอนิเมชันกล่องข้อความขยับขึ้นลงช้าๆ */
+        @keyframes floatCard {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 550px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        h1 {
+            color: #1565c0;
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #0d47a1;
+        }
+
+        /* ปุ่มกล่องข้อความสีฟ้าสำหรับกดไปหน้าถัดไป */
+        .btn-portfolio {
+            display: inline-block;
+            background: linear-gradient(135deg, #2196F3, #1565c0);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-portfolio:hover {
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>ยินดีต้อนรับสู่โปรไฟล์ของฉัน</h1>
+        <p>สวัสดีค่ะ! ฉันชื่อ <span class="highlight">พรนภา บุญคำ</span></p>
+        <p><span class="highlight">Pornnapha Boonkham</span></p>
+        <p>ขณะนี้กำลังเรียนอยู่แผนการเรียน <span class="highlight">Gifted Program</span></p>
+        <p>นี่คือเว็บไซต์แรกของฉันที่โฮสต์บน GitHub Pages!</p>
+        
+        <!-- พอกดปุ่มนี้จะวิ่งไปที่หน้า portfolio.html -->
+        <a href="portfolio.html" class="btn-portfolio">ดูแฟ้มสะสมผลงานของฉัน</a>
+    </div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - พรนภา บุญคำ</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
