@@ -21,7 +21,10 @@
         .content-container { margin-top: 100px; padding: 40px 20px; display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 100px); position: relative; z-index: 10; }
         .section-page { text-align: left; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); max-width: 900px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
         
-        .profile-img-large { width: 260px; height: 320px; object-fit: cover; border: 3px solid #64b5f6; border-radius: 12px; display: block; margin: 0 auto 30px auto; box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+        .page-main-title { font-size: 36px; font-weight: 600; color: #64b5f6; margin-bottom: 25px; text-align: center; text-shadow: 0 0 15px rgba(100, 181, 246, 0.5); }
+
+        .profile-img-large { width: 260px; height: 320px; object-fit: cover; border: 3px solid #64b5f6; border-radius: 12px; display: block; margin: 0 auto 30px auto; box-shadow: 0 8px 25px rgba(0,0,0,0.5); cursor: pointer; transition: transform 0.3s; }
+        .profile-img-large:hover { transform: scale(1.02); }
         
         .info-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
         .info-row { background: rgba(255, 255, 255, 0.08); padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); font-size: 16px; color: #f5f5f5; }
@@ -31,15 +34,28 @@
 
         .edu-container { display: flex; flex-direction: column; gap: 20px; }
         .edu-item { display: flex; align-items: center; background: rgba(255, 255, 255, 0.08); padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); gap: 20px; }
-        .edu-img-box { width: 90px; height: 90px; flex-shrink: 0; background: rgba(0,0,0,0.3); border: 2px dashed #64b5f6; border-radius: 8px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .edu-img-box { width: 90px; height: 90px; flex-shrink: 0; background: rgba(0,0,0,0.3); border: 2px dashed #64b5f6; border-radius: 8px; display: flex; justify-content: center; align-items: center; overflow: hidden; cursor: pointer; }
         .edu-img-box img { width: 100%; height: 100%; object-fit: cover; }
         .edu-info { display: flex; flex-direction: column; gap: 5px; }
         .edu-level { font-size: 20px; font-weight: 600; color: #ffffff; }
         .edu-school { font-size: 16px; color: #cfd8dc; font-weight: 300; }
+
+        /* สไตล์สำหรับกล่องแสดงรูปใหญ่ (Lightbox) */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        #lightbox.active { opacity: 1; pointer-events: auto; }
+        #lightbox img { max-width: 90%; max-height: 85vh; border: 4px solid #64b5f6; border-radius: 12px; }
+        .close-btn { position: absolute; top: 30px; right: 40px; font-size: 40px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.5); width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
     <div class="stars-container" id="starsContainer"></div>
+    
+    <!-- เลย์เอาต์สำหรับกดคลิกดูรูปใหญ่ -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoomed Image">
+    </div>
+
     <header>
         <nav>
             <a href="index.html">HOME</a>
@@ -51,10 +67,11 @@
     </header>
     <div class="content-container">
         <div class="section-page">
-            <!-- รูปภาพสี่เหลี่ยมขนาดใหญ่ขึ้น -->
-            <img src="3.jpg" alt="รูปโปรไฟล์" class="profile-img-large">
+            <h1 class="page-main-title">ABOUT ME</h1>
+
+            <!-- รูปภาพโปรไฟล์หลัก (คลิกเพื่อขยาย) -->
+            <img src="3.jpg" alt="รูปโปรไฟล์" class="profile-img-large" onclick="openLightbox(this.src)">
             
-            <!-- ข้อมูลส่วนตัวแบ่งเป็นช่องๆ ชิดซ้าย -->
             <div class="info-container">
                 <div class="info-row"><strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ</div>
                 <div class="info-row"><strong>ชื่อเล่น :</strong> มุก</div>
@@ -63,14 +80,12 @@
                 <div class="info-row"><strong>อายุ :</strong> 17 ปี</div>
             </div>
 
-            <!-- ระดับการศึกษา ตัวใหญ่ ชิดซ้าย -->
             <div class="section-heading-large">ระดับการศึกษา</div>
 
             <div class="edu-container">
                 <!-- ประถมศึกษา -->
                 <div class="edu-item">
-                    <div class="edu-img-box">
-                        <!-- ใส่ชื่อไฟล์รูปประถมศึกษาตรง src เช่น school1.jpg หรือปล่อยว่างไว้ถ้ายังไม่มี -->
+                    <div class="edu-img-box" onclick="openLightbox(this.querySelector('img').src)">
                         <img src="" alt="ประถมศึกษา">
                     </div>
                     <div class="edu-info">
@@ -81,8 +96,7 @@
 
                 <!-- มัธยมศึกษาตอนต้น -->
                 <div class="edu-item">
-                    <div class="edu-img-box">
-                        <!-- ใส่ชื่อไฟล์รูปม.ต้นตรง src หรือปล่อยว่างไว้ -->
+                    <div class="edu-img-box" onclick="openLightbox(this.querySelector('img').src)">
                         <img src="" alt="มัธยมศึกษาตอนต้น">
                     </div>
                     <div class="edu-info">
@@ -93,8 +107,7 @@
 
                 <!-- มัธยมศึกษาตอนปลาย -->
                 <div class="edu-item">
-                    <div class="edu-img-box">
-                        <!-- ใส่ชื่อไฟล์รูปม.ปลายตรง src หรือปล่อยว่างไว้ -->
+                    <div class="edu-img-box" onclick="openLightbox(this.querySelector('img').src)">
                         <img src="" alt="มัธยมศึกษาตอนปลาย">
                     </div>
                     <div class="edu-info">
@@ -121,39 +134,45 @@
             }
         }
         createStars();
-    </script>
-<script>
-    // สร้างฟังก์ชันและเอฟเฟกต์ประกายไฟตามตำแหน่งเมาส์
-    document.addEventListener('mousemove', function(e) {
-        // สร้างเอฟเฟกต์เฉพาะเมื่อขยับเมาส์ในระดับหนึ่งเพื่อไม่ให้หน่วงเกินไป
-        if (Math.random() > 0.3) {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = e.clientX + 'px';
-            sparkle.style.top = e.clientY + 'px';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            sparkle.style.zIndex = '9999';
-            sparkle.style.transition = 'all 1s ease-out';
-            sparkle.style.opacity = '1';
-            
-            document.body.appendChild(sparkle);
 
-            // สุ่มทิศทางเคลื่อนที่เล็กน้อยและจางหายไปช้าๆ
-            setTimeout(() => {
-                const randomX = (Math.random() - 0.5) * 50;
-                const randomY = (Math.random() - 0.5) * 50;
-                sparkle.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.5)`;
-                sparkle.style.opacity = '0';
-            }, 50);
-
-            // ลบ element ออกจาก DOM หลังจากอนิเมชันจบ
-            setTimeout(() => {
-                sparkle.remove();
-            }, 1050);
+        // ฟังก์ชันควบคุมการเปิด-ปิดรูปขยายใหญ่
+        function openLightbox(src) {
+            if(!src || src.includes('about.html')) return; // ถ้าไม่มีรูปหรือเป็นค่าว่างจะไม่เปิด
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
         }
-    });
-</script>
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // เอฟเฟกต์ประกายตามเมาส์
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.3) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                sparkle.style.zIndex = '9999';
+                sparkle.style.transition = 'all 1s ease-out';
+                sparkle.style.opacity = '1';
+                
+                document.body.appendChild(sparkle);
+
+                setTimeout(() => {
+                    const randomX = (Math.random() - 0.5) * 50;
+                    const randomY = (Math.random() - 0.5) * 50;
+                    sparkle.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.5)`;
+                    sparkle.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1050);
+            }
+        });
+    </script>
 </body>
 </html>
