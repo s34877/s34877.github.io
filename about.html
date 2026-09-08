@@ -40,7 +40,7 @@
         .edu-level { font-size: 20px; font-weight: 600; color: #ffffff; }
         .edu-school { font-size: 16px; color: #cfd8dc; font-weight: 300; }
 
-        /* สไตล์สำหรับกล่องแสดงรูปใหญ่ (Lightbox) */
+        /* สไตล์สำหรับกล่องแสดงรูปใหญ่เมื่อคลิก */
         #lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         #lightbox.active { opacity: 1; pointer-events: auto; }
         #lightbox img { max-width: 90%; max-height: 85vh; border: 4px solid #64b5f6; border-radius: 12px; }
@@ -69,17 +69,20 @@
         <div class="section-page">
             <h1 class="page-main-title">ABOUT ME</h1>
 
-            <!-- รูปภาพโปรไฟล์หลัก (คลิกเพื่อขยาย) -->
+            <!-- รูปภาพสี่เหลี่ยมขนาดใหญ่ขึ้น (คลิกเพื่อขยายได้) -->
             <img src="3.jpg" alt="รูปโปรไฟล์" class="profile-img-large" onclick="openLightbox(this.src)">
             
+            <!-- ข้อมูลส่วนตัว -->
             <div class="info-container">
                 <div class="info-row"><strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ</div>
                 <div class="info-row"><strong>ชื่อเล่น :</strong> มุก</div>
                 <div class="info-row"><strong>ระดับชั้น :</strong> มัธยมศึกษาปีที่ 6</div>
                 <div class="info-row"><strong>วันเกิด :</strong> 22/09/2551</div>
                 <div class="info-row"><strong>อายุ :</strong> 17 ปี</div>
+                <div class="info-row"><strong>GPAX :</strong> 3.94</div>
             </div>
 
+            <!-- ระดับการศึกษา -->
             <div class="section-heading-large">ระดับการศึกษา</div>
 
             <div class="edu-container">
@@ -135,9 +138,9 @@
         }
         createStars();
 
-        // ฟังก์ชันควบคุมการเปิด-ปิดรูปขยายใหญ่
+        // ฟังก์ชันเปิด-ปิดรูปขนาดใหญ่
         function openLightbox(src) {
-            if(!src || src.includes('about.html')) return; // ถ้าไม่มีรูปหรือเป็นค่าว่างจะไม่เปิด
+            if(!src || src.includes('about.html')) return;
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox').classList.add('active');
         }
@@ -145,34 +148,7 @@
             document.getElementById('lightbox').classList.remove('active');
         }
 
-        // เอฟเฟกต์ประกายตามเมาส์
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() > 0.3) {
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.style.position = 'fixed';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
-                sparkle.style.zIndex = '9999';
-                sparkle.style.transition = 'all 1s ease-out';
-                sparkle.style.opacity = '1';
-                
-                document.body.appendChild(sparkle);
-
-                setTimeout(() => {
-                    const randomX = (Math.random() - 0.5) * 50;
-                    const randomY = (Math.random() - 0.5) * 50;
-                    sparkle.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.5)`;
-                    sparkle.style.opacity = '0';
-                }, 50);
-
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 1050);
-            }
-        });
+        
     </script>
 </body>
 </html>
