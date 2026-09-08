@@ -7,32 +7,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
-        body { background: linear-gradient(135deg, #0b0c10, #1f2833, #0f2027, #203a43, #2c5364); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
-        .star { position: absolute; bottom: -20px; color: #fff; font-size: 12px; opacity: 0.8; animation: floatUp linear infinite, twinkle ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)); }
-        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; } }
-        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        
+        /* ตั้งค่ารูปตึกคณะเป็นพื้นหลังสุดของหน้าเว็บ พร้อมซ้อนเลเยอร์สีให้มืดลงเล็กน้อยเพื่อให้อ่านตัวหนังสือง่ายขึ้น */
+        body { 
+            background: linear-gradient(rgba(11, 12, 16, 0.75), rgba(31, 40, 51, 0.75)), url('images_2.jpg'); 
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; 
+            min-height: 100vh; 
+            position: relative; 
+            overflow-x: hidden; 
+        }
+
         header { background: rgba(15, 32, 39, 0.85); backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; display: flex; justify-content: center; padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 1000; }
         nav a { color: #cfd8dc; text-decoration: none; margin: 0 15px; font-size: 14px; font-weight: 400; transition: all 0.3s ease; padding-bottom: 3px; position: relative; }
         nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #64b5f6; transition: width 0.3s ease; }
         nav a:hover::after, nav a.active::after { width: 100%; }
         nav a:hover, nav a.active { color: #64b5f6; text-shadow: 0 0 10px rgba(100, 181, 246, 0.5); }
+        
         .content-container { margin-top: 100px; padding: 40px 20px; display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 100px); position: relative; z-index: 10; }
         
-        /* กรอบหลักพร้อมใส่รูปภาพพื้นหลังและไล่ระดับสีให้จางลง */
+        /* จัดเลย์เอาต์ให้ตรารูปวงกลมอยู่ด้านซ้าย และกล่องข้อความอยู่ด้านขวา */
+        .university-layout {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .uni-logo-container {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .uni-logo {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #64b5f6;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        /* กรอบข้อความเนื้อหา */
         .section-page { 
             text-align: left; 
-            background: linear-gradient(135deg, rgba(11, 12, 16, 0.90), rgba(31, 40, 51, 0.90)), url('images.jpg'); 
-            background-size: cover; 
-            background-position: center;
-            backdrop-filter: blur(8px); 
+            background: rgba(15, 23, 32, 0.85); 
+            backdrop-filter: blur(12px); 
             padding: 40px; 
             border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); 
-            max-width: 900px; 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
             width: 100%; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
         }
 
         .page-main-title { font-size: 32px; font-weight: 600; color: #64b5f6; margin-bottom: 25px; text-align: center; text-shadow: 0 0 15px rgba(100, 181, 246, 0.5); }
@@ -40,10 +72,20 @@
         .uni-section { display: flex; flex-direction: column; gap: 20px; color: #f5f5f5; font-size: 16px; line-height: 1.6; }
         .uni-title { color: #64b5f6; font-weight: 600; font-size: 18px; margin-bottom: 5px; }
         .uni-desc { background: rgba(255, 255, 255, 0.05); padding: 15px 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08); }
+
+        @media (max-width: 768px) {
+            .university-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .uni-logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="stars-container" id="starsContainer"></div>
     <header>
         <nav>
             <a href="index.html">HOME</a>
@@ -53,40 +95,31 @@
             <a href="contact.html">CONTACT</a>
         </nav>
     </header>
-    <div class="content-container">
-        <div class="section-page">
-            <h1 class="page-main-title">UNIVERSITY</h1>
-            
-            <div class="uni-section">
-                <div class="uni-desc">
-                    <div class="uni-title">คณะเภสัชศาสตร์ มหาวิทยาลัยมหิดล</div>
-                    เป็นสถาบันชั้นนำระดับประเทศที่โดดเด่นด้านวิชาการ งานวิจัย และนวัตกรรมสาธารณสุข พร้อมด้วยห้องปฏิบัติการและคณาจารย์ผู้ทรงคุณวุฒิที่สนับสนุนการเรียนรู้ด้านยาอย่างเต็มที่
-                </div>
 
-                <div class="uni-desc">
-                    <div class="uni-title">ทำไมถึงอยากเรียนที่นี่ :</div>
-                    มีความสนใจในวิชาเคมีเป็นทุนเดิม ประกอบกับเคยป่วยเป็นโรค SLE ทำให้เข้าใจความเจ็บปวดและความเศร้าของผู้ป่วยดี แรงบันดาลใจนี้จึงอยากนำความรู้ด้านเคมีมาพัฒนาและผลิตยารักษาโรค เพื่อช่วยบรรเทาทุกข์ทรมาน และคืนความสุขให้ผู้ป่วยมีคุณภาพชีวิตที่ดีขึ้น การได้เรียนที่นี่จึงเป็นก้าวสำคัญในการสานฝันนั้น
+    <div class="content-container">
+        <div class="university-layout">
+            <!-- ด้านซ้าย: รูปวงกลมตรามหาวิทยาลัยมหิดล -->
+            <div class="uni-logo-container">
+                <img src="images.png" alt="ตรามหาวิทยาลัยมหิดล" class="uni-logo">
+            </div>
+
+            <!-- ด้านขวา: กล่องข้อความข้อมูลมหาวิทยาลัย -->
+            <div class="section-page">
+                <h1 class="page-main-title">UNIVERSITY</h1>
+                
+                <div class="uni-section">
+                    <div class="uni-desc">
+                        <div class="uni-title">คณะเภสัชศาสตร์ มหาวิทยาลัยมหิดล</div>
+                        เป็นสถาบันชั้นนำระดับประเทศที่โดดเด่นด้านวิชาการ งานวิจัย และนวัตกรรมสาธารณสุข พร้อมด้วยห้องปฏิบัติการและคณาจารย์ผู้ทรงคุณวุฒิที่สนับสนุนการเรียนรู้ด้านยาอย่างเต็มที่
+                    </div>
+
+                    <div class="uni-desc">
+                        <div class="uni-title">ทำไมถึงอยากเรียนที่นี่ :</div>
+                        มีความสนใจในวิชาเคมีเป็นทุนเดิม ประกอบกับเคยป่วยเป็นโรค SLE ทำให้เข้าใจความเจ็บปวดและความเศร้าของผู้ป่วยดี แรงบันดาลใจนี้จึงอยากนำความรู้ด้านเคมีมาพัฒนาและผลิตยารักษาโรค เพื่อช่วยบรรเทาทุกข์ทรมาน และคืนความสุขให้ผู้ป่วยมีคุณภาพชีวิตที่ดีขึ้น การได้เรียนที่นี่จึงเป็นก้าวสำคัญในการสานฝันนั้น
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        function createStars() {
-            const container = document.getElementById('starsContainer');
-            for (let i = 0; i < 35; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.innerHTML = ['★', '✦', '✧', '✦', '❄'][Math.floor(Math.random() * 5)];
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.fontSize = (Math.random() * 15 + 10) + 'px';
-                star.style.animationDuration = `${Math.random() * 8 + 6}s, ${Math.random() * 2 + 1}s`;
-                star.style.animationDelay = `${Math.random() * 10}s, 0s`;
-                container.appendChild(star);
-            }
-        }
-        createStars();
-
-      
-    </script>
 </body>
 </html>
