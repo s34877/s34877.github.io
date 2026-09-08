@@ -19,12 +19,59 @@
             animation: gradientBG 15s ease infinite;
             color: #fff;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* Container สำหรับดาวลอย */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* ตัวดาวแต่ละดวง */
+        .star {
+            position: absolute;
+            bottom: -20px;
+            color: #fff;
+            font-size: 12px;
+            opacity: 0.8;
+            animation: floatUp linear infinite, twinkle ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
         }
 
         /* แถบเมนูด้านบน */
@@ -80,6 +127,8 @@
             justify-content: center;
             align-items: center;
             min-height: calc(100vh - 100px);
+            position: relative;
+            z-index: 10;
         }
 
         .section-page {
@@ -106,29 +155,67 @@
 
         /* หน้า HOME */
         .home-title {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 600;
             color: #64b5f6;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(100, 181, 246, 0.6);
             animation: pulseGlow 3s infinite alternate;
         }
 
         @keyframes pulseGlow {
             0% { text-shadow: 0 0 10px rgba(100, 181, 246, 0.4); }
-            100% { text-shadow: 0 0 25px rgba(100, 181, 246, 0.9), 0 0 5px #fff; }
+            100% { text-shadow: 0 0 25px rgba(100, 181, 246, 0.9), 0 0 10px #fff; }
         }
 
         .home-subtitle {
-            font-size: 18px;
+            font-size: 20px;
             color: #e0e0e0;
             font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        /* คำนำขนาดใหญ่ในหน้า HOME */
+        .home-intro-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 15px;
+            padding: 30px;
             margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .intro-heading {
+            font-size: 32px;
+            font-weight: 600;
+            color: #90caf9;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(144, 202, 249, 0.5);
+        }
+
+        .intro-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #f5f5f5;
+            font-weight: 300;
+        }
+
+        .intro-text p {
+            margin-bottom: 16px;
+            font-size: 18px;
+            color: #f5f5f5;
+            text-indent: 2em;
+        }
+
+        .intro-text p:last-child {
+            margin-bottom: 0;
         }
 
         .profile-img-2 {
-            width: 300px;
-            height: 200px;
+            width: 320px;
+            height: 220px;
             object-fit: cover;
             border: 3px solid #64b5f6;
             border-radius: 15px;
@@ -208,13 +295,7 @@
             text-shadow: 0 0 10px rgba(100, 181, 246, 0.4);
         }
 
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #b0bec5;
-        }
-
-        /* หน้า WORKS (จัดสไตล์เกียรติบัตรให้เด่นชัด) */
+        /* หน้า WORKS */
         .works-main-title {
             font-size: 36px;
             color: #64b5f6;
@@ -265,7 +346,6 @@
             flex-wrap: wrap;
         }
 
-        /* สไตล์กรอบเกียรติบัตร */
         .portfolio-img {
             object-fit: cover;
             border-radius: 10px;
@@ -295,7 +375,7 @@
             display: block;
         }
 
-        /* Lightbox (หน้าต่างแสดงรูปขนาดใหญ่เมื่อคลิก) */
+        /* Lightbox */
         #lightbox {
             position: fixed;
             top: 0;
@@ -404,7 +484,7 @@
             text-decoration: underline;
         }
 
-        /* Responsive สำหรับมือถือ */
+        /* Responsive */
         @media (max-width: 768px) {
             .img-double {
                 width: 100%;
@@ -415,12 +495,21 @@
                 height: 220px;
             }
             .home-title {
-                font-size: 36px;
+                font-size: 38px;
+            }
+            .intro-heading {
+                font-size: 24px;
+            }
+            .intro-text p {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
+
+    <!-- Container สร้างดาวลอย -->
+    <div class="stars-container" id="starsContainer"></div>
 
     <!-- แถบเมนูด้านบน -->
     <header>
@@ -445,7 +534,22 @@
         <!-- หน้า HOME -->
         <div id="home" class="section-page active">
             <h1 class="home-title">ยินดีต้อนรับ</h1>
-            <p class="home-subtitle">เว็ปไซต์แนะนำตัวของ พรนภา บุญคำ</p>
+            <p class="home-subtitle">เว็บไซต์พอร์ตโฟลิโอแนะนำตัวของ พรนภา บุญคำ</p>
+            
+            <!-- คำนำ (ข้อความอัปเดตใหม่เรียบร้อย) -->
+            <div class="home-intro-box">
+                <div class="intro-heading">✨ คำนำ (PREFACE) ✨</div>
+                <div class="intro-text">
+                    <p>แฟ้มสะสมผลงาน (Portfolio) เล่มนี้จัดทำขึ้นเพื่อรวบรวมประวัติส่วนตัว ประวัติการศึกษา ผลงาน กิจกรรม ประสบการณ์ ตลอดจนความสามารถและทักษะต่าง ๆ ของข้าพเจ้า นางสาวพรนภา บุญคำ นักเรียนชั้นมัธยมศึกษาปีที่ 6 แผนการเรียน Gifted เพื่อแสดงให้เห็นถึงความตั้งใจ ความมุ่งมั่น และพัฒนาการของข้าพเจ้าตลอดระยะเวลาที่ศึกษาในระดับมัธยมศึกษา</p>
+                    
+                    <p>ผลงานและกิจกรรมที่ปรากฏในแฟ้มสะสมผลงานเล่มนี้ ล้วนเป็นส่วนหนึ่งของประสบการณ์ที่ช่วยส่งเสริมให้ข้าพเจ้าได้เรียนรู้และพัฒนาตนเอง ทั้งในด้านวิชาการ การทำงานร่วมกับผู้อื่น ความรับผิดชอบ การแก้ไขปัญหา และการนำความรู้ไปประยุกต์ใช้ในสถานการณ์ต่าง ๆ ซึ่งประสบการณ์เหล่านี้เป็นพื้นฐานสำคัญในการเตรียมความพร้อมสำหรับการศึกษาต่อในระดับอุดมศึกษาและการก้าวเข้าสู่อนาคต</p>
+                    
+                    <p>ข้าพเจ้าหวังเป็นอย่างยิ่งว่าแฟ้มสะสมผลงานเล่มนี้จะสะท้อนถึงตัวตน ความสามารถ ความสนใจ และความตั้งใจของข้าพเจ้าได้เป็นอย่างดี และจะเป็นส่วนหนึ่งที่ช่วยให้ผู้อ่านได้รู้จักข้าพเจ้ามากยิ่งขึ้น</p>
+                    
+                    <p>ข้าพเจ้าขอขอบพระคุณคุณครู ผู้ปกครอง และผู้ที่มีส่วนเกี่ยวข้องทุกท่านที่ให้คำแนะนำ สนับสนุน และมอบโอกาสในการเรียนรู้และพัฒนาตนเองมาโดยตลอด จนทำให้แฟ้มสะสมผลงานเล่มนี้สำเร็จลุล่วงไปด้วยดี</p>
+                </div>
+            </div>
+
             <img src="2.jpg" alt="รูปภาพที่ 2" class="profile-img-2" onclick="openLightbox(this.src)">
         </div>
 
@@ -468,10 +572,12 @@
         <!-- หน้า UNIVERSITY -->
         <div id="university" class="section-page">
             <h2>UNIVERSITY</h2>
-            <p>คณะเภสัชศาสตร์ มหาวิทยาลัยมหิดล
-เป็นสถาบันชั้นนำระดับประเทศที่โดดเด่นด้านวิชาการ งานวิจัย และนวัตกรรมสาธารณสุข พร้อมด้วยห้องปฏิบัติการและคณาจารย์ผู้ทรงคุณวุฒิที่สนับสนุนการเรียนรู้ด้านยาอย่างเต็มที่
-ทำไมถึงอยากเรียนที่นี่
-มีความสนใจในวิชาเคมีเป็นทุนเดิม ประกอบกับเคยป่วยเป็นโรค SLE ทำให้เข้าใจความเจ็บปวดและความเศร้าของผู้ป่วยดี แรงบันดาลใจนี้จึงอยากนำความรู้ด้านเคมีมาพัฒนาและผลิตยารักษาโรค เพื่อช่วยบรรเทาความทุกข์ทรมาน และคืนความสุขให้ผู้ป่วยมีคุณภาพชีวิตที่ดีขึ้น การได้เรียนที่นี่จึงเป็นก้าวสำคัญในการสานฝันนั้น</p>
+            <p style="text-align: left; line-height: 1.8; color: #b0bec5; font-size: 16px;">
+                <strong style="color: #64b5f6;">คณะเภสัชศาสตร์ มหาวิทยาลัยมหิดล</strong><br>
+                เป็นสถาบันชั้นนำระดับประเทศที่โดดเด่นด้านวิชาการ งานวิจัย และนวัตกรรมสาธารณสุข พร้อมด้วยห้องปฏิบัติการและคณาจารย์ผู้ทรงคุณวุฒิที่สนับสนุนการเรียนรู้ด้านยาอย่างเต็มที่<br><br>
+                <strong style="color: #64b5f6;">ทำไมถึงอยากเรียนที่นี่ :</strong><br>
+                มีความสนใจในวิชาเคมีเป็นทุนเดิม ประกอบกับเคยป่วยเป็นโรค SLE ทำให้เข้าใจความเจ็บปวดและความเศร้าของผู้ป่วยดี แรงบันดาลใจนี้จึงอยากนำความรู้ด้านเคมีมาพัฒนาและผลิตยารักษาโรค เพื่อช่วยบรรเทาความทุกข์ทรมาน และคืนความสุขให้ผู้ป่วยมีคุณภาพชีวิตที่ดีขึ้น การได้เรียนที่นี่จึงเป็นก้าวสำคัญในการสานฝันนั้น
+            </p>
         </div>
 
         <!-- หน้า WORKS -->
@@ -560,6 +666,44 @@
     </div>
 
     <script>
+        // ฟังก์ชันสร้างดาวลอยไปมา
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const starIcons = ['★', '✦', '✧', '✦', '❄'];
+            const numberOfStars = 35; // จำนวนดวงดาว
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // สุ่มไอคอนดาว
+                star.innerHTML = starIcons[Math.floor(Math.random() * starIcons.length)];
+                
+                // สุ่มตำแหน่ง X
+                star.style.left = Math.random() * 100 + 'vw';
+                
+                // สุ่มขนาดดาว
+                const size = Math.random() * 15 + 10;
+                star.style.fontSize = size + 'px';
+                
+                // สุ่มความเร็วและระยะเวลาของแอนิเมชัน
+                const duration = Math.random() * 8 + 6; // 6-14 วินาที
+                star.style.animationDuration = `${duration}s, ${Math.random() * 2 + 1}s`;
+                
+                // สุ่มเวลาเริ่มต้นให้ดาวทยอยขึ้นมา
+                star.style.animationDelay = `${Math.random() * 10}s, 0s`;
+                
+                // สุ่มสีดาวให้มีความเป็นประกายวิ้งๆ (ฟ้าอ่อน/ชมพูอ่อน/ขาว/เหลืองอ่อน)
+                const colors = ['#ffffff', '#64b5f6', '#bbdefb', '#fff9c4', '#f8bbd0'];
+                star.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // เรียกใช้ฟังก์ชันสร้างดาวเมื่อโหลดหน้าเว็บ
+        createStars();
+
         // ฟังก์ชันเปลี่ยนหน้าเมนูด้านบน
         function switchTab(tabId) {
             const pages = document.querySelectorAll('.section-page');
