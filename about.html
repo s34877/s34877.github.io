@@ -18,15 +18,24 @@
         nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #64b5f6; transition: width 0.3s ease; }
         nav a:hover::after, nav a.active::after { width: 100%; }
         nav a:hover, nav a.active { color: #64b5f6; text-shadow: 0 0 10px rgba(100, 181, 246, 0.5); }
-        .content-container { margin-top: 100px; padding: 40px 20px; display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 100px); position: relative; z-index: 10; }
-        .section-page { text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); max-width: 900px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
-        @keyframes floatBox { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
-        .profile-img-3 { width: 140px; height: 140px; object-fit: cover; border: 4px solid #64b5f6; border-radius: 50%; margin: 0 auto 20px auto; display: block; animation: floatBox 4s ease-in-out infinite; box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
-        .about-details { font-size: 16px; line-height: 1.8; color: #e0e0e0; margin-bottom: 25px; text-align: left; display: inline-block; }
-        .about-details strong { color: #64b5f6; }
-        .white-card-box { background: rgba(255, 255, 255, 0.95); color: #333; padding: 20px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.4); animation: floatBox 4s ease-in-out infinite; margin-top: 10px; }
-        .education-title { font-size: 20px; font-weight: 600; color: #1565c0; margin-bottom: 8px; }
-        .school-name { font-size: 16px; color: #444; font-weight: 400; }
+        .content-container { margin-top: 100px; padding: 40px 20px; display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 100px); position: relative; z-index: 10; }
+        .section-page { text-align: left; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); max-width: 900px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        .profile-img-large { width: 260px; height: 320px; object-fit: cover; border: 3px solid #64b5f6; border-radius: 12px; display: block; margin: 0 auto 30px auto; box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+        
+        .info-container { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+        .info-row { background: rgba(255, 255, 255, 0.08); padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.1); font-size: 16px; color: #f5f5f5; }
+        .info-row strong { color: #64b5f6; }
+
+        .section-heading-large { font-size: 24px; font-weight: 600; color: #64b5f6; margin-bottom: 20px; text-align: left; text-shadow: 0 0 10px rgba(100, 181, 246, 0.4); }
+
+        .edu-container { display: flex; flex-direction: column; gap: 20px; }
+        .edu-item { display: flex; align-items: center; background: rgba(255, 255, 255, 0.08); padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); gap: 20px; }
+        .edu-img-box { width: 90px; height: 90px; flex-shrink: 0; background: rgba(0,0,0,0.3); border: 2px dashed #64b5f6; border-radius: 8px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .edu-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .edu-info { display: flex; flex-direction: column; gap: 5px; }
+        .edu-level { font-size: 20px; font-weight: 600; color: #ffffff; }
+        .edu-school { font-size: 16px; color: #cfd8dc; font-weight: 300; }
     </style>
 </head>
 <body>
@@ -42,18 +51,59 @@
     </header>
     <div class="content-container">
         <div class="section-page">
-            <img src="3.jpg" alt="รูปภาพที่ 3" class="profile-img-3">
-            <div class="about-details">
-                <strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ<br>
-                <strong>ชื่อเล่น :</strong> มุก<br>
-                <strong>ระดับชั้น :</strong> ม.6/2 เลขที่ 26<br>
-                <strong>วันเกิด :</strong> 22/09/2551<br>
-                <strong>อายุ :</strong> 17 ปี
+            <!-- รูปภาพสี่เหลี่ยมขนาดใหญ่ขึ้น -->
+            <img src="3.jpg" alt="รูปโปรไฟล์" class="profile-img-large">
+            
+            <!-- ข้อมูลส่วนตัวแบ่งเป็นช่องๆ ชิดซ้าย -->
+            <div class="info-container">
+                <div class="info-row"><strong>ชื่อ-สกุล :</strong> นางสาวพรนภา บุญคำ</div>
+                <div class="info-row"><strong>ชื่อเล่น :</strong> มุก</div>
+                <div class="info-row"><strong>ระดับชั้น :</strong> มัธยมศึกษาปีที่ 6</div>
+                <div class="info-row"><strong>วันเกิด :</strong> 22/09/2551</div>
+                <div class="info-row"><strong>อายุ :</strong> 17 ปี</div>
             </div>
-            <div class="white-card-box">
-                <div class="education-title">การศึกษา</div>
-                <div class="school-name">โรงเรียนบ้านบึง “อุตสาหกรรมนุเคราะห์”</div>
+
+            <!-- ระดับการศึกษา ตัวใหญ่ ชิดซ้าย -->
+            <div class="section-heading-large">ระดับการศึกษา</div>
+
+            <div class="edu-container">
+                <!-- ประถมศึกษา -->
+                <div class="edu-item">
+                    <div class="edu-img-box">
+                        <!-- ใส่ชื่อไฟล์รูปประถมศึกษาตรง src เช่น school1.jpg หรือปล่อยว่างไว้ถ้ายังไม่มี -->
+                        <img src="" alt="ประถมศึกษา">
+                    </div>
+                    <div class="edu-info">
+                        <div class="edu-level">ระดับประถมศึกษา</div>
+                        <div class="edu-school">โรงเรียนวัฒนดรุณวิทย์</div>
+                    </div>
+                </div>
+
+                <!-- มัธยมศึกษาตอนต้น -->
+                <div class="edu-item">
+                    <div class="edu-img-box">
+                        <!-- ใส่ชื่อไฟล์รูปม.ต้นตรง src หรือปล่อยว่างไว้ -->
+                        <img src="" alt="มัธยมศึกษาตอนต้น">
+                    </div>
+                    <div class="edu-info">
+                        <div class="edu-level">ระดับมัธยมศึกษาตอนต้น</div>
+                        <div class="edu-school">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
+                    </div>
+                </div>
+
+                <!-- มัธยมศึกษาตอนปลาย -->
+                <div class="edu-item">
+                    <div class="edu-img-box">
+                        <!-- ใส่ชื่อไฟล์รูปม.ปลายตรง src หรือปล่อยว่างไว้ -->
+                        <img src="" alt="มัธยมศึกษาตอนปลาย">
+                    </div>
+                    <div class="edu-info">
+                        <div class="edu-level">ระดับมัธยมศึกษาตอนปลาย</div>
+                        <div class="edu-school">โรงเรียนบ้านบึง "อุตสาหกรรมนุเคราะห์"</div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
     <script>
