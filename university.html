@@ -8,7 +8,7 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
         
-        /* ปรับความเข้มของเลเยอร์สีทับหน้าให้น้อยลง เพื่อให้รูปพื้นหลัง (images_3.jpg) ดูจางและสว่างขึ้น */
+        /* พื้นหลังสุดเป็นรูป images_3.jpg แบบจางๆ */
         body { 
             background: linear-gradient(rgba(11, 12, 16, 0.45), rgba(31, 40, 51, 0.45)), url('images_3.jpg'); 
             background-size: cover; 
@@ -34,6 +34,19 @@
             gap: 40px;
             max-width: 1000px;
             width: 100%;
+            /* เพิ่มอนิเมชันให้เลย์เอาต์รวมค่อยๆ โผล่ขึ้นมาตอนโหลดหน้า */
+            animation: fadeInContent 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .uni-logo-container {
@@ -43,7 +56,7 @@
             align-items: center;
         }
 
-        /* รูปตรามหาวิทยาลัยมหิดลวงกลม ขยับขึ้นลงได้ */
+        /* รูปตรามหาวิทยาลัยมหิดลวงกลม ขยับขึ้นลงได้ และผสมอนิเมชันตอนโหลด */
         .uni-logo {
             width: 200px;
             height: 200px;
@@ -62,7 +75,7 @@
             100% { transform: translateY(0px); }
         }
 
-        /* กรอบข้อความเนื้อหา ปรับพื้นหลังให้เขบทึบขึ้นเล็กน้อยเพื่อให้ตัวหนังสืออ่านง่ายตัดกับพื้นหลังที่จางลง */
+        /* กรอบข้อความเนื้อหา */
         .section-page { 
             text-align: left; 
             background: rgba(15, 23, 32, 0.90); 
