@@ -122,5 +122,38 @@
         }
         createStars();
     </script>
+<script>
+    // สร้างฟังก์ชันและเอฟเฟกต์ประกายไฟตามตำแหน่งเมาส์
+    document.addEventListener('mousemove', function(e) {
+        // สร้างเอฟเฟกต์เฉพาะเมื่อขยับเมาส์ในระดับหนึ่งเพื่อไม่ให้หน่วงเกินไป
+        if (Math.random() > 0.3) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            sparkle.style.zIndex = '9999';
+            sparkle.style.transition = 'all 1s ease-out';
+            sparkle.style.opacity = '1';
+            
+            document.body.appendChild(sparkle);
+
+            // สุ่มทิศทางเคลื่อนที่เล็กน้อยและจางหายไปช้าๆ
+            setTimeout(() => {
+                const randomX = (Math.random() - 0.5) * 50;
+                const randomY = (Math.random() - 0.5) * 50;
+                sparkle.style.transform = `translate(${randomX}px, ${randomY}px) scale(0.5)`;
+                sparkle.style.opacity = '0';
+            }, 50);
+
+            // ลบ element ออกจาก DOM หลังจากอนิเมชันจบ
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1050);
+        }
+    });
+</script>
 </body>
 </html>
