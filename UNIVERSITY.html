@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - มหาวิทยาลัยที่สนใจ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Prompt', sans-serif; }
+        body { background: linear-gradient(135deg, #0b0c10, #1f2833, #0f2027, #203a43, #2c5364); background-size: 400% 400%; animation: gradientBG 15s ease infinite; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .star { position: absolute; bottom: -20px; color: #fff; font-size: 12px; opacity: 0.8; animation: floatUp linear infinite, twinkle ease-in-out infinite alternate; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8)); }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(-105vh) rotate(360deg); opacity: 0; } }
+        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        header { background: rgba(15, 32, 39, 0.85); backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; display: flex; justify-content: center; padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 1000; }
+        nav a { color: #cfd8dc; text-decoration: none; margin: 0 15px; font-size: 14px; font-weight: 400; transition: all 0.3s ease; padding-bottom: 3px; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #64b5f6; transition: width 0.3s ease; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: #64b5f6; text-shadow: 0 0 10px rgba(100, 181, 246, 0.5); }
+        .content-container { margin-top: 100px; padding: 40px 20px; display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 100px); position: relative; z-index: 10; }
+        .section-page { text-align: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); max-width: 900px; width: 100%; border: 1px solid rgba(255, 255, 255, 0.1); }
+        h2 { font-size: 32px; color: #64b5f6; margin-bottom: 25px; text-shadow: 0 0 10px rgba(100, 181, 246, 0.4); }
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="starsContainer"></div>
+    <header>
+        <nav>
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT ME</a>
+            <a href="university.html" class="active">UNIVERSITY</a>
+            <a href="works.html">WORKS</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
+    </header>
+    <div class="content-container">
+        <div class="section-page">
+            <h2>UNIVERSITY</h2>
+            <p style="text-align: left; line-height: 1.8; color: #b0bec5; font-size: 16px;">
+                <strong style="color: #64b5f6;">คณะเภสัชศาสตร์ มหาวิทยาลัยมหิดล</strong><br>
+                เป็นสถาบันชั้นนำระดับประเทศที่โดดเด่นด้านวิชาการ งานวิจัย และนวัตกรรมสาธารณสุข พร้อมด้วยห้องปฏิบัติการและคณาจารย์ผู้ทรงคุณวุฒิที่สนับสนุนการเรียนรู้ด้านยาอย่างเต็มที่<br><br>
+                <strong style="color: #64b5f6;">ทำไมถึงอยากเรียนที่นี่ :</strong><br>
+                มีความสนใจในวิชาเคมีเป็นทุนเดิม ประกอบกับเคยป่วยเป็นโรค SLE ทำให้เข้าใจความเจ็บปวดและความเศร้าของผู้ป่วยดี แรงบันดาลใจนี้จึงอยากนำความรู้ด้านเคมีมาพัฒนาและผลิตยารักษาโรค เพื่อช่วยบรรเทาความทุกข์ทรมาน และคืนความสุขให้ผู้ป่วยมีคุณภาพชีวิตที่ดีขึ้น การได้เรียนที่นี่จึงเป็นก้าวสำคัญในการสานฝันนั้น
+            </p>
+        </div>
+    </div>
+    <script>
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.innerHTML = ['★', '✦', '✧', '✦', '❄'][Math.floor(Math.random() * 5)];
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                star.style.animationDuration = `${Math.random() * 8 + 6}s, ${Math.random() * 2 + 1}s`;
+                star.style.animationDelay = `${Math.random() * 10}s, 0s`;
+                container.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>
